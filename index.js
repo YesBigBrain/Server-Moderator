@@ -40,6 +40,7 @@ function check(id, member, guild){
                 ],
                 }]
               })
+              .catch(() => console.log("CANNOT DM USER"));
             setTimeout(function(){ 
                 member.kick()
              }, 1000);
@@ -73,6 +74,7 @@ function kick(memberid, msg){
             ],
         }]
       })
+      .catch(() => console.log("CANNOT DM USER"));
       setTimeout(function(){ 
         msg.guild.members.cache.get(memberid).kick()
      }, 1000);
@@ -114,6 +116,7 @@ function remove(msgparts, msg){
         ],
         }]
       })
+      .catch(() => console.log("CANNOT DM USER"));
     })
     kick(msgparts[1], msg)
 }
@@ -143,6 +146,7 @@ function add(msgparts, msg){
         ],
         }]
       })
+      .catch(() => console.log("CANNOT DM USER"));
     })
 }
 
@@ -156,13 +160,15 @@ client.on('guildMemberAdd', member => {
 
 client.on("message", msg => {
     let msgparts = msg.content.split(' ')
-    if (msgparts[0] === '!check') {
-      msg.reply("pong");
-    }else if(msgparts[0] === '!whitelist') {
-        add(msgparts,msg)
-    }else if(msgparts[0] === '!blacklist') {
-        remove(msgparts,msg)
+    if (msg.author.id == '572570660417830912'){
+        if (msgparts[0] === '!check') {
+            msg.reply("pong");
+          }else if(msgparts[0] === '!whitelist') {
+              add(msgparts,msg)
+          }else if(msgparts[0] === '!blacklist') {
+              remove(msgparts,msg)
+          }
     }
   })
 
-client.login("OTY1NzgyMTAzODYwMDY4NDEy.Yl4MrA.ocx6QbNQg2XFZtpRwWKdYo6RCo8")
+client.login("")
